@@ -40,8 +40,7 @@ promoRouter
     res.end("PUT operation not supported on /promotions");
   })
   .delete((req, res, next) => {
-    Promotions.create(req.body)
-      .remove({})
+    Promotions.findByIdAndRemove(req.params.dishId)
       .then(
         (resp) => {
           res.statusCode = 200;
@@ -52,7 +51,6 @@ promoRouter
       )
       .catch((err) => next(err));
   });
-
 promoRouter
   .route("/:promoId")
   .get((req, res, next) => {

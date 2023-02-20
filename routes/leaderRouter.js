@@ -40,8 +40,7 @@ leaderRouter
     res.end("PUT operation not supported on /leaders");
   })
   .delete((req, res, next) => {
-    Leaders.create(req.body)
-      .remove({})
+    Leaders.findByIdAndRemove(req.params.dishId)
       .then(
         (resp) => {
           res.statusCode = 200;
