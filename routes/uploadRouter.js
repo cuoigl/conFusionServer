@@ -29,8 +29,11 @@ uploadRouter.use(bodyParser.json());
 
 uploadRouter
   .route("/")
+  .options(cors.corsWithOptions, (req, res) => {
+    res.sendStatus(200);
+  })
   .get(
-    cors.corsWithOptions,
+    cors.cors,
     authenticate.verifyUser,
     authenticate.verifyAdmin,
     (req, res, next) => {

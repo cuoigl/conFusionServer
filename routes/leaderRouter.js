@@ -13,7 +13,10 @@ leaderRouter.use(bodyParser.json());
 
 leaderRouter
   .route("/")
-  .get(cors.corsWithOptions, (req, res, next) => {
+  .options(cors.corsWithOptions, (req, res) => {
+    res.sendStatus(200);
+  })
+  .get(cors.cors, (req, res, next) => {
     Leaders.find({})
       .then(
         (leaders) => {
@@ -72,7 +75,10 @@ leaderRouter
 
 leaderRouter
   .route("/:leaderId")
-  .get(cors.corsWithOptions, (req, res, next) => {
+  .options(cors.corsWithOptions, (req, res) => {
+    res.sendStatus(200);
+  })
+  .get(cors.cors, (req, res, next) => {
     Leaders.findById(req.params.leaderId)
       .then(
         (leader) => {
