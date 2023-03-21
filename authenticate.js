@@ -24,7 +24,6 @@ opts.secretOrKey = config.secretKey;
 
 exports.jwtPassport = passport.use(
   new JwtStrategy(opts, (jwt_payload, done) => {
-    console.log("JWT payload: ", jwt_payload);
     User.findOne({ _id: jwt_payload._id }, (err, user) => {
       if (err) {
         return done(err, false);
@@ -43,7 +42,6 @@ exports.verifyAdmin = function (req, res, next) {
   User.findOne({ _id: req.user._id })
     .then(
       (user) => {
-        console.log("User: ", req.user);
         if (user.admin) {
           next();
         } else {
